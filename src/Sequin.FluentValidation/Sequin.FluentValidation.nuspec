@@ -5,8 +5,8 @@
     <version>$version$</version>
     <title>$title$</title>
     <authors>Jason Mitchell</authors>
-    <licenseUrl>https://github.com/jasonmitchell/sequin/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/jasonmitchell/sequin/</projectUrl>
+    <licenseUrl>https://github.com/sequin/sequin.fluentvalidation/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/sequin/sequin.fluentvalidation/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Provides middleware for validating commands in Sequin</description>
     <copyright>Copyright 2015</copyright>
