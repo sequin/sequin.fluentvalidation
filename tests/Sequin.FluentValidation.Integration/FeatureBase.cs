@@ -1,6 +1,6 @@
 ﻿namespace Sequin.FluentValidation.Integration
 {
-    using System;
+    using System.Reflection;
     using Infrastructure;
     using Microsoft.Owin.Testing;
     using Middleware;
@@ -23,7 +23,7 @@
                                                             PostProcessor = postProcessor,
                                                             CommandPipeline = new []
                                                                               {
-                                                                                  new CommandPipelineStage(typeof(ValidateCommand), new ReflectionValidatorFactory(AppDomain.CurrentDomain.GetAssemblies())), 
+                                                                                  new CommandPipelineStage(typeof(ValidateCommand), new ReflectionValidatorFactory(Assembly.GetExecutingAssembly())), 
                                                                               }
                                                          });
                                        });

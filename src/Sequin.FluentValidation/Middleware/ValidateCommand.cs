@@ -26,7 +26,7 @@
         public override async Task Invoke(IOwinContext context)
         {
             var command = context.GetCommand();
-            var validationResult = Validate(command);
+            var validationResult = await Validate(command);
 
             if (validationResult != null && validationResult.IsValid)
             {
@@ -50,7 +50,7 @@
             context.Response.Json(errors);
         }
 
-        private ValidationResult Validate(object command)
+        private Task<ValidationResult> Validate(object command)
         {
             var commandType = command.GetType();
 
@@ -60,7 +60,7 @@
                 var methodCallExpression = (MethodCallExpression)expression.Body;
                 var methodInfo = methodCallExpression.Method.GetGenericMethodDefinition().MakeGenericMethod(commandType);
 
-                var result = (ValidationResult)methodInfo.Invoke(this, new[] { command });
+                var result = (Task<ValidationResult>)methodInfo.Invoke(this, new[] { command });
                 return result;
 
             }
@@ -72,12 +72,15 @@
             return null;
         }
 
-        private ValidationResult ExecuteValidator<T>(T command)
+        private Task<ValidationResult> ExecuteValidator<T>(T command)
         {
             var validator = validatorFactory.GetValidator<T>();
-            var result = validator?.Validate(command);
+            if (validator != null)
+            {
+                return validator.ValidateAsync(command);
+            }
 
-            return result;
+            return Task.FromResult<ValidationResult>(null);
         }
     }
 }
