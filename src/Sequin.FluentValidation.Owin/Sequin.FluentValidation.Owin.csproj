@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{29F3F13E-A42B-40C0-973E-3C074912AD40}</ProjectGuid>
+    <ProjectGuid>{81683439-6105-4170-9FA0-0801047C3E90}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sequin.FluentValidation</RootNamespace>
-    <AssemblyName>Sequin.FluentValidation</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>Sequin.FluentValidation.Owin</RootNamespace>
+    <AssemblyName>Sequin.FluentValidation.Owin</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,8 +46,16 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="OwinRequestScopeContext, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OwinRequestScopeContext.1.0.1\lib\NET45\OwinRequestScopeContext.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Sequin, Version=0.5.186.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sequin.0.5.186\lib\net45\Sequin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sequin.Owin, Version=0.5.186.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sequin.Owin.0.5.186\lib\net45\Sequin.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -61,15 +68,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandValidationException.cs" />
-    <Compile Include="DefaultDictionaryFormatter.cs" />
-    <Compile Include="IValidationResultFormatter.cs" />
-    <Compile Include="Pipeline\ValidateCommand.cs" />
+    <Compile Include="Middleware\CommandValidationResponseMiddleware.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ValidatorNotRegisteredException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sequin.FluentValidation\Sequin.FluentValidation.csproj">
+      <Project>{29F3F13E-A42B-40C0-973E-3C074912AD40}</Project>
+      <Name>Sequin.FluentValidation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

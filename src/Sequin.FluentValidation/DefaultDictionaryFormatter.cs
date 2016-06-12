@@ -3,7 +3,7 @@
     using System.Linq;
     using global::FluentValidation.Results;
 
-    internal class DefaultDictionaryFormatter : IValidationResultFormatter
+    public class DefaultDictionaryFormatter : IValidationResultFormatter
     {
         public object Format(ValidationResult validationResult)
         {
